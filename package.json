@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@create-figma-plugin/ui": "^3.2.0",
+    "@create-figma-plugin/utilities": "^3.2.0",
+    "preact": ">=10",
+    "react-hook-form": "^7.51.4"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^3.2.0",
+    "@create-figma-plugin/tsconfig": "^3.2.0",
+    "@figma/plugin-typings": "1.90.0",
+    "@tailwindcss/typography": "^0.5.13",
+    "concurrently": ">=8",
+    "tailwindcss": ">=3",
+    "typescript": ">=4"
+  },
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "tailwindcss --input ./src/styles/input.css --output ./src/styles/output.css",
+    "build:js": "build-figma-plugin --typecheck --minify",
+    "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
+    "watch:css": "tailwindcss --input ./src/styles/input.css --output ./src/styles/output.css --watch",
+    "watch:js": "build-figma-plugin --typecheck --watch"
+  },
+  "figma-plugin": {
+    "editorType": [
+      "figma",
+      "dev"
+    ],
+    "id": "tailwindcss-config-generator",
+    "name": "TailwindCSS Config Generator",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
+  }
+}

@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply !relative;
+}
+
+div[class^="_modal"] {
+  @apply w-11/12 h-full;
+}
