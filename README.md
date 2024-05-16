@@ -1,6 +1,10 @@
-# TailwindCSS Config Generator
+# TailwindCSS Config Generator for Flowbite
 
 Export Figma Variables and Styles to TailwindCSS configurations and/or CSS variables. Supports both Tailwind 3 (theme config object) and 4 (css variables).
+
+As most Figma -> Tailwind plugins, it does require the variables & styles to be configured a certain way. This plugin was built based on the way variables and styles are configured in the [Flowbite Design System](https://www.figma.com/community/file/1179442320711977498), and other figma templates with design systems based on tailwind.
+
+Available [here](https://www.figma.com/community/plugin/1372697425539501289)
 
 ## Development guide
 

@@ -27,8 +27,11 @@
       "figma",
       "dev"
     ],
-    "id": "tailwindcss-config-generator",
-    "name": "TailwindCSS Config Generator",
+    "networkAccess": { 
+      "allowedDomains": ["none" ]
+    },
+    "id": "1372697425539501289",
+    "name": "TailwindCSS Config Generator for Flowbite",
     "main": "src/main.ts",
     "ui": "src/ui.tsx"
   }
