@@ -27,6 +27,7 @@
       "figma",
       "dev"
     ],
+    "capabilities": ["inspect"],
     "networkAccess": { 
       "allowedDomains": ["none" ]
     },
