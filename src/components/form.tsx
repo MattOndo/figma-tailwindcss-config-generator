@@ -118,7 +118,6 @@ function Form({loading, setLoading, setOutput, handleExit}: {loading: boolean, s
             </div>
           )}
           <Toggle name="useSpacing" value={formState.useSpacing} onChange={updateValue}><Text>Spacing</Text></Toggle>
-          <Toggle name="useScreens" value={formState.useScreens} onChange={updateValue}><Text>Screens & Containers</Text></Toggle>
         </div>
         <div class="checkbox">
           <Toggle name="useEffect" value={formState.useEffect} onChange={updateValue}><Text>Effects</Text></Toggle>
