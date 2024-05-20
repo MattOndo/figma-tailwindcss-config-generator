@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a bug in Faust
+description: Report a bug
 body:
   - type: markdown
     attributes:
