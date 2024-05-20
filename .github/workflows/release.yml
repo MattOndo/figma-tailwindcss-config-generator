@@ -1,0 +1,72 @@
+# GitHub Action:
+# Runs when publishing a release
+# Creates a branch from the release tag
+
+name: Build and Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-release:
+    name: Build and Upload Release Asset
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get the tag name
+        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+
+      ## Create Branch from Tag
+      - name: New Release Branch
+        uses: peterjgrainger/action-create-branch@v2.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: '${{ env.TAG }}'
+          
+      ## Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      ## Install NPM packages
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+
+      ## Build assets for production
+      - name: Build assets for production
+        run: yarn build
+
+      - name: Get the repo directory name
+        run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
+
+      ## Copy files to new temporary folder, ignoring files unnecessay in production.
+      - name: copy files to temp folder - necessary to create the propper container
+        run: rsync -av --exclude-from=.deployignore . ${{ env.REPO_NAME }}/
+
+      ## Zip up the Plugin
+      - name: manual zip
+        run: zip -r ${{ env.REPO_NAME }}.zip ${{ env.REPO_NAME }}/
+
+      ## Delete temporary folder
+      - name: remove temp folder
+        run: rm -rf ${{ env.REPO_NAME }}/
+
+      ## Move the plugin zip file, required for following actions to function propoerly.
+      - name: move the zip
+        run: mkdir release && mv ${{ env.REPO_NAME }}.zip release/
+
+      ## Add plugin zip to the current release
+      - name: Upload files to current release
+        uses: svenstaro/upload-release-action@2.5.0
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release/${{ env.REPO_NAME }}.zip
+          asset_name: ${{ env.REPO_NAME }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
