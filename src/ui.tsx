@@ -6,7 +6,7 @@ import { h } from 'preact'
 import { useEffect, useState, useRef } from 'preact/hooks'
 import '!./styles/output.css'
 
-function Plugin () {
+function Plugin() {
   const [loading, setLoading] = useState(false)
   const [output, setOutput] = useState('')
   const textAreaRef = useRef(null)
@@ -18,7 +18,7 @@ function Plugin () {
   useEffect(() => {
     window.addEventListener('message', (message) => {
       if (message.data.pluginMessage.type === 'generated') {
-        const data = JSON.parse(message.data.pluginMessage.data);
+        const data = JSON.parse(message.data.pluginMessage.data)
         setOutput(data)
         setLoading(false)
       } else if (message.data.pluginMessage.type === 'error') {
@@ -27,34 +27,23 @@ function Plugin () {
         setOutput('')
       }
     })
-  }, []);
-  
-  function handleCopy(e:any) {
-    e.preventDefault();
-    emit('copy', {output});
+  }, [])
 
-    (textAreaRef.current! as HTMLTextAreaElement).select()
+  function handleCopy(e: any) {
+    e.preventDefault()
+    emit('copy', { output })
+
+    ;(textAreaRef.current! as HTMLTextAreaElement).select()
     document.execCommand('copy')
-
   }
 
   return (
-    <div className="flex flex-col px-4 h-full" >
+    <div className="flex flex-col px-4 h-full">
       <VerticalSpace space="medium" />
 
-      <Form 
-        loading={loading} 
-        setLoading={setLoading} 
-        setOutput={setOutput} 
-        handleExit={handleExit} 
-      />
+      <Form loading={loading} setLoading={setLoading} setOutput={setOutput} handleExit={handleExit} />
 
-      <ResultsModal
-        handleCopy={handleCopy}
-        handleExit={handleExit}
-        output={output}
-        textAreaRef={textAreaRef}
-      />
+      <ResultsModal handleCopy={handleCopy} handleExit={handleExit} output={output} textAreaRef={textAreaRef} />
 
       <VerticalSpace space="medium" />
     </div>

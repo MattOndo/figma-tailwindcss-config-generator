@@ -2,25 +2,29 @@ import { Modal, IconButton, IconNavigateBack32, IconCross32, Text, Button } from
 import { h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 
-function ResultsModal({handleCopy, handleExit, output, textAreaRef}: {handleCopy: any, handleExit: any, output: string, textAreaRef: any}) {
-
+function ResultsModal({
+  handleCopy,
+  handleExit,
+  output,
+  textAreaRef,
+}: { handleCopy: any; handleExit: any; output: string; textAreaRef: any }) {
   const [isOpen, setIsOpen] = useState(false)
 
   function handleCloseButtonClick(event: any) {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   useEffect(() => {
     window.addEventListener('message', (message) => {
       if (message.data.pluginMessage.type === 'generated') {
-        const data = JSON.parse(message.data.pluginMessage.data);
+        const data = JSON.parse(message.data.pluginMessage.data)
         setIsOpen(true)
       } else if (message.data.pluginMessage.type === 'error') {
         console.error('Error', message.data.pluginMessage.data)
-        setIsOpen(false);
+        setIsOpen(false)
       }
     })
-  }, []);
+  }, [])
 
   return (
     <Modal open={isOpen} transition={true} position="right">
@@ -37,15 +41,15 @@ function ResultsModal({handleCopy, handleExit, output, textAreaRef}: {handleCopy
           </IconButton>
         </div>
         <div class="font-mono h-full">
-          <textarea 
-            name="output" 
+          <textarea
+            name="output"
             class="overflow-x-scroll overflow-wrap whitespace-pre w-full h-full resize-none bg-transparent"
-            ref={textAreaRef} 
-            value={output} 
-            onClick={handleCopy} 
+            ref={textAreaRef}
+            value={output}
+            onClick={handleCopy}
             readOnly
-            >
-              Select all
+          >
+            Select all
           </textarea>
         </div>
       </div>
