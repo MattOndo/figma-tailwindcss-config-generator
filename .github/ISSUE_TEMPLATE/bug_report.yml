@@ -1,0 +1,52 @@
+name: Bug report
+description: Report a bug in Faust
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thank you for taking the time to report a possible bug!
+
+        Please remember, a bug report is _not the place to ask questions_. You can start a topic in [GitHub
+        Discussions](https://github.com/MattOndo/figma-tailwindcss-config-generator/discussions).
+  - type: textarea
+    attributes:
+      label: Description
+      description: >-
+        Please write a brief description of the bug, including what you expected and what actually happened.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: >-
+        Please list all the steps needed to reproduce the bug in an *isolated* way.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: >-
+        Add any other context about the problem here, such as screenshots, error logs, etc.
+  - type: input
+    attributes:
+      label: "Figma Version"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Plugin Version"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Design or Dev Mode?
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Please confirm that you have searched existing issues in the repo.
+      description: >-
+        You can do this by searching https://github.com/MattOndo/figma-tailwindcss-config-generator/issues.
+      options:
+        - label: 'Yes'
+          required: true

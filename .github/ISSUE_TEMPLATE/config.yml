@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: General Help Request
+    url: https://github.com/MattOndo/figma-tailwindcss-config-generator/discussions
+    about: For general questions and help requests, create a new topic in GitHub Discussions
