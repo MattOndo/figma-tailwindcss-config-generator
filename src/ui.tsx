@@ -32,7 +32,6 @@ function Plugin() {
   function handleCopy(e: any) {
     e.preventDefault()
     emit('copy', { output })
-
     ;(textAreaRef.current! as HTMLTextAreaElement).select()
     document.execCommand('copy')
   }
